@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Audio File Processor</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; max-width: 600px; margin: auto; }
+    label { display: block; margin-top: 10px; }
+    input, button { margin-top: 5px; }
+  </style>
+</head>
+<body>
+  <h2>Upload Audio and Metadata</h2>
+  <form id="uploadForm" enctype="multipart/form-data">
+    <label>Audio File:
+      <input type="file" name="audio_file" required />
+    </label>
+    <label>Metadata File:
+      <input type="file" name="meta_file" required />
+    </label>
+    <button type="submit">Upload</button>
+  </form>
+
+  <h2>Process Files</h2>
+  <form id="processForm" enctype="multipart/form-data">
+    <label>Audio Filename:
+      <input type="text" name="audio_filename" placeholder="example.wav" required />
+    </label>
+    <label>Metadata Filename:
+      <input type="text" name="meta_filename" placeholder="example.txt" required />
+    </label>
+    <button type="submit">Process</button>
+  </form>
+
+  <h2>Download Processed Files</h2>
+  <label>Processed Audio Filename:
+    <input type="text" id="downloadAudio" placeholder="processed_example.wav" />
+  </label>
+  <button onclick="download('audio')">Download Audio</button>
+
+  <label>Processed Metadata Filename:
+    <input type="text" id="downloadMeta" placeholder="processed_example.txt" />
+  </label>
+  <button onclick="download('meta')">Download Meta</button>
+
+  <script>
+    const uploadForm = document.getElementById("uploadForm");
+    const processForm = document.getElementById("processForm");
+
+    uploadForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const formData = new FormData(uploadForm);
+      const res = await fetch("http://localhost:8000/upload/", {
+        method: "POST",
+        body: formData,
+      });
+      const text = await res.text();
+      alert("Upload Response:\n" + text);
+    });
+
+    processForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const formData = new FormData(processForm);
+      const res = await fetch("http://localhost:8000/process/", {
+        method: "POST",
+        body: formData,
+      });
+      const text = await res.text();
+      alert("Process Response:\n" + text);
+    });
+
+    function download(type) {
+      const inputId = type === "audio" ? "downloadAudio" : "downloadMeta";
+      const filename = document.getElementById(inputId).value;
+      if (!filename) {
+        alert("Please enter a filename.");
+        return;
+      }
+      const url = `http://localhost:8000/download/${type}/${filename}`;
+      window.open(url, "_blank");
+    }
+  </script>
+</body>
+</html>
