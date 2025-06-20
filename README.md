@@ -103,14 +103,5 @@ aquatune-server/
 
 ---
 
-## 🧠 Future Improvements
-
-- Add automatic waveform visualizer for timing verification
-- Support multi-track audio mixes
-- Authentication and user projects
-- Web UI with audio previews and editing timeline
-
----
-
 ## 👩‍💻 Created by Alina  
 For swimmers, by a swimmer. 🏊‍♀️🎶
