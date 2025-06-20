@@ -1,5 +1,6 @@
 
 # Aquatune Server 🎧💧
+**Requires Python 3.8+**
 
 **Aquatune Server** is the backend engine for Alina’s synchronized swimming music processing project. It allows users to upload music tracks and metadata files that indicate when swimmers are underwater or above water. The server processes the audio using sound design techniques (like underwater muffling and EQ filtering) to simulate how music is perceived by swimmers during a routine.
 
@@ -14,6 +15,15 @@ This is designed to help synchronized swimming teams prepare and practice with a
 - 📥 Download the processed audio and updated metadata
 - ⚡ FastAPI-based HTTP interface with interactive Swagger docs
 
+---
+## ⚡ Quickstart
+
+```bash
+git clone https://github.com/alinaqzhu/aquatune.git
+cd aquatune
+pip install -r requirements.txt
+uvicorn main:app --reload
+```
 ---
 
 ## 🧩 Dependencies
@@ -39,8 +49,8 @@ pip install -r requirements.txt
 1. **Clone the repo**
 
 ```bash
-git clone https://github.com/your-username/aquatune-server.git
-cd aquatune-server
+git clone https://github.com/your-username/aquatune.git
+cd aquatune
 ```
 
 2. **Install Python dependencies**
