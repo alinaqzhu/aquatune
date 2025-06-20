@@ -1,62 +1,116 @@
-# Project Title
 
-Simple overview of use/purpose.
+# Aquatune Server 🎧💧
 
-## Description
+**Aquatune Server** is the backend engine for Alina’s synchronized swimming music processing project. It allows users to upload music tracks and metadata files that indicate when swimmers are underwater or above water. The server processes the audio using sound design techniques (like underwater muffling and EQ filtering) to simulate how music is perceived by swimmers during a routine.
 
-An in-depth paragraph about your project and overview of use.
+This is designed to help synchronized swimming teams prepare and practice with a realistic auditory experience that matches live conditions.
 
-## Getting Started
+---
 
-### Dependencies
+## 🚀 Features
 
-* Describe any prerequisites, libraries, OS version, etc., needed before installing program.
-* ex. Windows 10
+- 🎵 Upload original audio and routine metadata files
+- 🌀 Process music with underwater/above-water transitions
+- 📥 Download the processed audio and updated metadata
+- ⚡ FastAPI-based HTTP interface with interactive Swagger docs
 
-### Installing
+---
 
-* How/where to download your program
-* Any modifications needed to be made to files/folders
+## 🧩 Dependencies
 
-### Executing program
+| Package     | Purpose                              |
+|-------------|--------------------------------------|
+| `fastapi`   | API server framework                 |
+| `uvicorn`   | ASGI server for running FastAPI      |
+| `pydub`     | Audio manipulation and processing    |
+| `ffmpeg`    | Required backend for `pydub`         |
+| `python-multipart` | Required for file uploads    |
 
-* How to run the program
-* Step-by-step bullets
+Install them all with:
+
+```bash
+pip install -r requirements.txt
 ```
-code blocks for commands
+
+---
+
+## 📦 Installation
+
+1. **Clone the repo**
+
+```bash
+git clone https://github.com/your-username/aquatune-server.git
+cd aquatune-server
 ```
 
-## Help
+2. **Install Python dependencies**
 
-Any advise for common problems or issues.
+```bash
+pip install fastapi uvicorn pydub python-multipart
 ```
-command to run if program contains helper info
+
+3. **Install `ffmpeg` (required by pydub)**
+
+Mac:
+```bash
+brew install ffmpeg
 ```
 
-## Authors
+Ubuntu:
+```bash
+sudo apt update
+sudo apt install ffmpeg
+```
 
-Contributors names and contact info
+Windows:
+- Download from [https://ffmpeg.org/download.html](https://ffmpeg.org/download.html)
+- Add to your system PATH
 
-ex. Dominique Pizzie  
-ex. [@DomPizzie](https://twitter.com/dompizzie)
+---
 
-## Version History
+## 🏁 Running the Server
 
-* 0.2
-    * Various bug fixes and optimizations
-    * See [commit change]() or See [release history]()
-* 0.1
-    * Initial Release
+```bash
+uvicorn main:app --reload
+```
 
-## License
+Visit the interactive API at:  
+📍 [http://localhost:8000/docs](http://localhost:8000/docs)
 
-This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
+---
 
-## Acknowledgments
+## 📂 Project Structure
 
-Inspiration, code snippets, etc.
-* [awesome-readme](https://github.com/matiassingers/awesome-readme)
-* [PurpleBooth](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
-* [dbader](https://github.com/dbader/readme-template)
-* [zenorocha](https://gist.github.com/zenorocha/4526327)
-* [fvcproductions](https://gist.github.com/fvcproductions/1bfc2d4aecb01a834b46)
+```
+aquatune-server/
+├── main.py               # FastAPI server
+├── uploads/              # Uploaded audio and metadata
+├── processed/            # Processed audio and output files
+├── static/index.html     # Optional HTML upload UI
+├── README.md
+```
+
+---
+
+## 🧪 API Endpoints
+
+| Method | Endpoint              | Description                          |
+|--------|------------------------|--------------------------------------|
+| POST   | `/upload/`             | Upload audio + metadata              |
+| POST   | `/process/`            | Process uploaded files               |
+| GET    | `/download/audio/{}`   | Download processed audio file        |
+| GET    | `/download/meta/{}`    | Download processed metadata file     |
+
+---
+
+## 🧠 Future Improvements
+
+- Add automatic waveform visualizer for timing verification
+- Support multi-track audio mixes
+- Authentication and user projects
+- Web UI with audio previews and editing timeline
+
+---
+
+## 👩‍💻 Created by Alina  
+For swimmers, by a swimmer. 🏊‍♀️🎶
